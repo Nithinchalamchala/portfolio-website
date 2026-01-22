@@ -22,6 +22,14 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./Nithin_prof.jpeg">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Nithin Portfolio">
+    <link rel="apple-touch-icon" href="./Nithin_prof.jpeg">
 </head>
 <body>
     <!-- Preloader -->
@@ -93,6 +101,14 @@
 
     <!-- Navigation Backdrop -->
     <div class="nav-backdrop" id="navBackdrop"></div>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Main Content Area -->
     <main class="main-content">
@@ -262,6 +278,33 @@
                         <h3 class="stat-number" data-target="2">0</h3>
                         <p class="stat-label">Leadership Roles</p>
                         <span class="stat-sublabel">CS Club & Events</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Performance Metrics -->
+            <div class="performance-metrics" data-aos="fade-up" data-aos-duration="1000">
+                <h3>🏆 Key Performance Metrics</h3>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-value">0.86</div>
+                        <div class="metric-label">QWK Score</div>
+                        <div class="metric-desc">Bone Age Prediction Model</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">95%</div>
+                        <div class="metric-label">Faster Diagnosis</div>
+                        <div class="metric-desc">AI-powered Medical Imaging</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Uptime</div>
+                        <div class="metric-desc">Production Web Applications</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">3+</div>
+                        <div class="metric-label">Years</div>
+                        <div class="metric-desc">Programming Experience</div>
                     </div>
                 </div>
             </div>
@@ -687,6 +730,37 @@
                     <i class="fab fa-github"></i>
                     View All Projects on GitHub
                 </a>
+            </div>
+            
+            <!-- Live Demos Section -->
+            <div class="live-demos-section" data-aos="fade-up" data-aos-duration="1000">
+                <h3>🚀 Live Project Demos</h3>
+                <div class="demos-grid">
+                    <div class="demo-card">
+                        <div class="demo-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>Bone Age Prediction</h4>
+                        <p>AI model for medical imaging analysis</p>
+                        <a href="#" class="demo-link" target="_blank">View Demo</a>
+                    </div>
+                    <div class="demo-card">
+                        <div class="demo-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h4>Supermarket Billing</h4>
+                        <p>Full-stack web application</p>
+                        <a href="http://supermarketbilling.wuaze.com/" class="demo-link" target="_blank">View Demo</a>
+                    </div>
+                    <div class="demo-card">
+                        <div class="demo-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Data Analytics Dashboard</h4>
+                        <p>Interactive data visualization</p>
+                        <a href="#" class="demo-link" target="_blank">View Demo</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

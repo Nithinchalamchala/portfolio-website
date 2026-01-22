@@ -561,3 +561,344 @@ const sectionObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('section[id]').forEach(section => {
     sectionObserver.observe(section);
 });
+
+// ===== SCROLL PROGRESS INDICATOR =====
+function initializeScrollProgress() {
+    const scrollProgress = document.getElementById('scrollProgress');
+    
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        
+        if (scrollProgress) {
+            scrollProgress.style.width = scrollPercent + '%';
+        }
+    });
+}
+
+// ===== BACK TO TOP BUTTON =====
+function initializeBackToTop() {
+    const backToTop = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTop?.classList.add('visible');
+        } else {
+            backToTop?.classList.remove('visible');
+        }
+    });
+    
+    backToTop?.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// ===== ENHANCED ANIMATIONS =====
+function initializeEnhancedAnimations() {
+    // Stagger animations for cards
+    const cards = document.querySelectorAll('.project-card, .skill-category, .demo-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const heroImage = document.querySelector('.hero-image');
+        if (heroImage && scrolled < window.innerHeight) {
+            heroImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+        }
+    });
+}
+
+// ===== PERFORMANCE MONITORING =====
+function initializePerformanceMonitoring() {
+    // Track page load time
+    window.addEventListener('load', () => {
+        const loadTime = performance.now();
+        console.log(`Page loaded in ${loadTime.toFixed(2)}ms`);
+        
+        // You could send this to analytics
+        trackEvent('page_performance', {
+            load_time: loadTime,
+            user_agent: navigator.userAgent
+        });
+    });
+}
+
+// ===== ENHANCED CONTACT FORM =====
+function initializeEnhancedContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) return;
+    
+    // Add real-time validation
+    const inputs = contactForm.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('blur', validateField);
+        input.addEventListener('input', clearErrors);
+    });
+    
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate all fields
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!validateField.call(input)) {
+                isValid = false;
+            }
+        });
+        
+        if (!isValid) {
+            showNotification('Please fix the errors before submitting.', 'error');
+            return;
+        }
+        
+        // Get form data
+        const formData = new FormData(this);
+        const firstName = formData.get('firstName');
+        const lastName = formData.get('lastName');
+        const email = formData.get('email');
+        const subject = formData.get('subject');
+        const message = formData.get('message');
+        
+        // Create mailto link
+        const mailtoSubject = `Portfolio Contact: ${subject}`;
+        const mailtoBody = `Name: ${firstName} ${lastName}\nEmail: ${email}\n\nMessage:\n${message}`;
+        const mailtoLink = `mailto:chalamchala2005@gmail.com?subject=${encodeURIComponent(mailtoSubject)}&body=${encodeURIComponent(mailtoBody)}`;
+        
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.classList.add('loading');
+        
+        // Simulate sending delay
+        setTimeout(() => {
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.classList.remove('loading');
+            
+            // Show success message
+            showNotification('Thank you! Your email client should open with the message ready to send.', 'success');
+            
+            // Reset form
+            this.reset();
+            
+            // Track form submission
+            trackEvent('contact_form_submitted', {
+                subject: subject,
+                timestamp: new Date().toISOString()
+            });
+        }, 1000);
+    });
+}
+
+function validateField() {
+    const field = this;
+    const value = field.value.trim();
+    let isValid = true;
+    
+    // Remove existing error
+    clearFieldError(field);
+    
+    // Required field validation
+    if (field.hasAttribute('required') && !value) {
+        showFieldError(field, 'This field is required');
+        isValid = false;
+    }
+    
+    // Email validation
+    if (field.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            showFieldError(field, 'Please enter a valid email address');
+            isValid = false;
+        }
+    }
+    
+    // Name validation
+    if ((field.name === 'firstName' || field.name === 'lastName') && value) {
+        if (value.length < 2) {
+            showFieldError(field, 'Name must be at least 2 characters');
+            isValid = false;
+        }
+    }
+    
+    // Message validation
+    if (field.name === 'message' && value) {
+        if (value.length < 10) {
+            showFieldError(field, 'Message must be at least 10 characters');
+            isValid = false;
+        }
+    }
+    
+    return isValid;
+}
+
+function showFieldError(field, message) {
+    field.classList.add('error');
+    
+    let errorElement = field.parentNode.querySelector('.field-error');
+    if (!errorElement) {
+        errorElement = document.createElement('div');
+        errorElement.className = 'field-error';
+        field.parentNode.appendChild(errorElement);
+    }
+    
+    errorElement.textContent = message;
+}
+
+function clearFieldError(field) {
+    field.classList.remove('error');
+    const errorElement = field.parentNode.querySelector('.field-error');
+    if (errorElement) {
+        errorElement.remove();
+    }
+}
+
+function clearErrors() {
+    clearFieldError(this);
+}
+
+// ===== KEYBOARD SHORTCUTS =====
+function initializeKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + K to focus search (if you add search later)
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            // Focus search input if available
+        }
+        
+        // ESC to close modals/menus
+        if (e.key === 'Escape') {
+            const mobileNavToggle = document.getElementById('mobileNavToggle');
+            const sidebarNav = document.getElementById('sidebarNav');
+            const navBackdrop = document.getElementById('navBackdrop');
+            if (mobileNavToggle?.classList.contains('active')) {
+                mobileNavToggle.classList.remove('active');
+                sidebarNav?.classList.remove('active');
+                navBackdrop?.classList.remove('active');
+            }
+        }
+    });
+}
+
+// ===== LAZY LOADING IMAGES =====
+function initializeLazyLoading() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                img.classList.add('loaded');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// ===== UPDATE INITIALIZATION =====
+function initializeApp() {
+    // Initialize theme
+    setTheme(currentTheme);
+    
+    // Initialize AOS
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    }
+    
+    // Initialize all components
+    initializePreloader();
+    initializeNavigation();
+    initializeTypingEffect();
+    initializeScrollEffects();
+    initializeProjectFilter();
+    initializeSkillBars();
+    initializeEnhancedContactForm(); // Updated
+    initializeCounters();
+    initializeScrollProgress(); // New
+    initializeBackToTop(); // New
+    initializeEnhancedAnimations(); // New
+    initializePerformanceMonitoring(); // New
+    initializeKeyboardShortcuts(); // New
+    initializeLazyLoading(); // New
+    
+    // Start preloader
+    setTimeout(() => {
+        hidePreloader();
+    }, 2500);
+}
+
+// ===== ENHANCED ERROR HANDLING =====
+window.addEventListener('error', function(e) {
+    console.error('JavaScript Error:', e.error);
+    
+    // Track errors for debugging
+    trackEvent('javascript_error', {
+        message: e.message,
+        filename: e.filename,
+        lineno: e.lineno,
+        colno: e.colno,
+        stack: e.error?.stack
+    });
+});
+
+// ===== ENHANCED ANALYTICS =====
+function trackEvent(eventName, properties = {}) {
+    // Enhanced analytics tracking
+    const eventData = {
+        event: eventName,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        ...properties
+    };
+    
+    console.log('Event tracked:', eventData);
+    
+    // You could integrate with:
+    // - Google Analytics 4
+    // - Mixpanel
+    // - Amplitude
+    // - Custom analytics endpoint
+}
+
+// ===== PERFORMANCE OPTIMIZATION =====
+// Use the existing debounced scroll handler
+window.addEventListener('scroll', debouncedScrollHandler, { passive: true });
+
+// Preload critical resources
+function preloadCriticalResources() {
+    const criticalImages = [
+        './Nithin_prof.jpeg',
+        './Nithin_casual.jpeg'
+    ];
+    
+    criticalImages.forEach(src => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
+    });
+}
+
+// Initialize preloading
+preloadCriticalResources();
