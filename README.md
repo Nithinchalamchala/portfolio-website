@@ -1,54 +1,60 @@
 # Anjaninithin Chalamchala - Portfolio Website
 
-A modern, responsive portfolio website showcasing my skills, projects, and experience in Computer Science, FPGA development, AI/ML, and Full-Stack development.
+A modern, responsive portfolio website showcasing my skills as an AI/ML Engineer and Full Stack Developer.
+
+🌐 **Live Website**: [https://nithinchalamchala.github.io/portfolio-website/](https://nithinchalamchala.github.io/portfolio-website/)
 
 ## 🚀 Features
 
-- **Responsive Design**: Fully responsive layout that works on all devices
-- **Modern UI/UX**: Clean, professional design with smooth animations
-- **Interactive Elements**: Hover effects, smooth scrolling, and dynamic content
-- **Contact Form**: Integrated contact form with email functionality
+- **Modern Design**: Clean, professional layout with sidebar navigation
+- **Responsive**: Fully responsive design that works on all devices
+- **Interactive**: Smooth animations, typing effects, and scroll animations
+- **Dark/Light Theme**: Toggle between dark and light themes
+- **Project Showcase**: Detailed project cards with filtering capabilities
+- **Skills Visualization**: Animated skill bars and categorized technical skills
+- **Contact Form**: Functional contact form with email integration
 - **Performance Optimized**: Fast loading with optimized assets
-- **SEO Friendly**: Proper meta tags and semantic HTML structure
 
 ## 🛠️ Technologies Used
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Styling**: Custom CSS with Flexbox and Grid
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Animations**: AOS (Animate On Scroll) library
 - **Icons**: Font Awesome
-- **Fonts**: Google Fonts (Inter)
-- **Animations**: CSS animations and JavaScript interactions
+- **Fonts**: Inter & JetBrains Mono from Google Fonts
+- **Design**: Modern CSS Grid & Flexbox layouts
+- **Deployment**: GitHub Pages
 
-## 📁 Project Structure
+## 📱 Sections
 
-```
-portfolio/
-├── index.html          # Main HTML file
-├── styles.css          # CSS styles
-├── script.js           # JavaScript functionality
-└── README.md           # Project documentation
-```
+1. **Hero Section**: Introduction with typing animation and key statistics
+2. **About**: Personal background, education, and achievements
+3. **Experience**: Timeline of work experience and education
+4. **Projects**: Showcase of major projects with filtering
+5. **Skills**: Technical skills organized by categories
+6. **Contact**: Contact information and message form
 
-## 🎯 Sections
+## 🎨 Design Features
 
-1. **Hero Section**: Introduction with call-to-action buttons
-2. **About**: Personal information and key statistics
-3. **Projects**: Featured projects with descriptions and tech stacks
-4. **Skills**: Technical skills organized by categories
-5. **Contact**: Contact information and form
+- Sidebar navigation with profile information
+- Smooth scroll animations
+- Interactive project cards with hover effects
+- Animated skill progress bars
+- Responsive mobile navigation
+- Theme toggle functionality
+- Professional color scheme
 
-## 🚀 Getting Started
+## 🚀 Deployment
 
-### Prerequisites
+This website is automatically deployed using GitHub Pages. Any changes pushed to the `main` branch will trigger a new deployment.
 
-- A modern web browser
-- A web server (optional, for local development)
+### Local Development
 
-### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Nithinchalamchala/portfolio-website.git
+   ```
 
-1. Clone or download the repository
-2. Open `index.html` in your web browser
-3. For local development with a server:
+2. Open `index.html` in your browser or serve it using a local server:
    ```bash
    # Using Python 3
    python -m http.server 8000
@@ -60,94 +66,33 @@ portfolio/
    php -S localhost:8000
    ```
 
-## 📱 Responsive Breakpoints
+## 📧 Contact
 
-- **Desktop**: 1200px and above
-- **Tablet**: 768px to 1199px
-- **Mobile**: Below 768px
+- **Email**: chalamchala2005@gmail.com
+- **Phone**: +91 7842279827
+- **LinkedIn**: [Anjaninithin Chalamchala](https://www.linkedin.com/in/anjaninithin-chalamchala-591517285/)
+- **GitHub**: [Nithinchalamchala](https://github.com/Nithinchalamchala)
+- **LeetCode**: [chalamchala2005](https://leetcode.com/u/chalamchala2005/)
 
-## 🎨 Customization
+## 🎓 About Me
 
-### Colors
-The website uses a modern color palette:
-- Primary: `#2563eb` (Blue)
-- Secondary: `#fbbf24` (Amber)
-- Background: `#f9fafb` (Light Gray)
-- Text: `#1f2937` (Dark Gray)
+Computer Science Student at IIITDM Kancheepuram with a CGPA of 9.1/10. Specializing in:
+- AI/ML Engineering
+- Full Stack Web Development
+- FPGA Hardware Acceleration
+- System Design & Architecture
 
-### Fonts
-- Primary font: Inter (Google Fonts)
-- Fallback: system fonts
+## 🏆 Key Achievements
 
-### Animations
-- Fade-in animations on scroll
-- Hover effects on interactive elements
-- Smooth scrolling navigation
-- Counter animations for statistics
+- 500+ LeetCode problems solved
+- Joint Core Member of CS Club
+- Multiple successful projects in AI/ML and Full Stack development
+- Research work in FPGA-accelerated optimization algorithms
 
-## 📧 Contact Form
-
-The contact form uses `mailto:` functionality to open the user's default email client with pre-filled information. For production use, consider implementing:
-- Server-side form handling
-- Email service integration (EmailJS, Formspree, etc.)
-- Form validation and spam protection
-
-## 🔧 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## 📈 Performance
-
-- Optimized CSS and JavaScript
-- Minimal external dependencies
-- Efficient animations using CSS transforms
-- Lazy loading for images (when implemented)
-
-## 🚀 Deployment
-
-### GitHub Pages
-1. Push code to GitHub repository
-2. Go to repository Settings > Pages
-3. Select source branch (usually `main`)
-4. Your site will be available at `https://username.github.io/repository-name`
-
-### Netlify
-1. Connect your GitHub repository
-2. Set build command: (none needed for static site)
-3. Set publish directory: `/` (root)
-4. Deploy
-
-### Vercel
-1. Import your GitHub repository
-2. Configure project settings
-3. Deploy
-
-## 📝 License
+## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 👤 Author
-
-**Anjaninithin Chalamchala**
-- Email: chalamchala2005@gmail.com
-- Academic Email: cs23b1102@iiitdm.ac.in
-- Institution: IIITDM Kancheepuram
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## 📞 Support
-
-If you have any questions or need help with the website, feel free to reach out via email or create an issue in the repository.
-
 ---
 
-**Note**: This portfolio website is designed to showcase technical skills and projects. Feel free to use it as a template for your own portfolio, but please update the content with your own information.
+© 2024 Anjaninithin Chalamchala. All rights reserved.
