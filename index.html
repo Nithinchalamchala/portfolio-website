@@ -115,10 +115,18 @@
         <!-- Hero Section -->
         <section id="home" class="hero-section">
             <div class="hero-content-wrapper">
+                <div class="hero-image">
+                    <div class="image-container">
+                        <img src="./Nithin_casual.jpeg" alt="Anjaninithin Chalamchala" class="main-image">
+                        <div class="image-overlay"></div>
+                    </div>
+                </div>
+                
                 <div class="hero-text">
                     <div class="hero-intro">
-                        <h1 class="hero-greeting">I am</h1>
-                        <h2 class="hero-title">a <span class="typing-text" id="typingText">AI/ML Engineer</span></h2>
+                        <p class="hero-greeting">Hello, I'm</p>
+                        <h1 class="hero-name">Anjaninithin Chalamchala</h1>
+                        <h2 class="hero-title">I'm a <span class="typing-text" id="typingText">Full Stack Developer</span></h2>
                     </div>
                     
                     <div class="hero-description">
@@ -127,15 +135,15 @@
                     
                     <div class="hero-stats">
                         <div class="stat-item">
-                            <span class="stat-number" data-target="9.1">0</span>
+                            <span class="stat-number" data-target="9.1">9.1</span>
                             <span class="stat-label">CGPA</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number" data-target="500">0</span>
+                            <span class="stat-number" data-target="500">500+</span>
                             <span class="stat-label">LeetCode</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number" data-target="6">0</span>
+                            <span class="stat-number" data-target="6">6+</span>
                             <span class="stat-label">Projects</span>
                         </div>
                     </div>
@@ -143,13 +151,6 @@
                     <div class="hero-actions">
                         <a href="#projects" class="btn-primary">View Portfolio</a>
                         <a href="./Resume_Overall.pdf" class="btn-secondary" download>Download CV</a>
-                    </div>
-                </div>
-                
-                <div class="hero-image">
-                    <div class="image-container">
-                        <img src="./Nithin_casual.jpeg" alt="Anjaninithin Chalamchala" class="main-image">
-                        <div class="image-overlay"></div>
                     </div>
                 </div>
             </div>
@@ -164,148 +165,89 @@
                 <div class="section-divider"></div>
             </div>
             
-            <div class="about-content">
-                <div class="about-text" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="about-intro">
-                        <h3>Hello! I'm Anjaninithin Chalamchala</h3>
-                        <p class="about-description">
-                            A passionate Computer Science student at IIITDM Kancheepuram with a strong academic record (CGPA: 9.1/10). 
-                            I specialize in AI/ML Engineering, Full Stack Development, and FPGA Acceleration, with expertise in creating intelligent systems and scalable applications.
-                        </p>
-                        <p class="about-description">
-                            My journey in technology spans from developing neural networks for medical imaging to building full-stack web applications, 
-                            with a particular interest in AI-powered solutions and performance optimization through hardware-software co-design.
-                        </p>
-                    </div>
-                    
-                    <div class="about-details">
-                        <div class="detail-item">
-                            <i class="fas fa-brain"></i>
-                            <div class="detail-content">
-                                <h4>AI/ML Expertise</h4>
-                                <p>Deep Learning, Computer Vision<br>TensorFlow, PyTorch</p>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-code"></i>
-                            <div class="detail-content">
-                                <h4>Full Stack Dev</h4>
-                                <p>React, Node.js, Python<br>Web Applications</p>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-trophy"></i>
-                            <div class="detail-content">
-                                <h4>Achievements</h4>
-                                <p>500+ LeetCode Problems<br>CS Club Joint Core</p>
-                            </div>
+            <div class="about-wrapper">
+                <!-- Profile Image -->
+                <div class="about-image" data-aos="fade-up">
+                    <div class="about-image-container">
+                        <img src="./Nithin_prof.jpeg" alt="Anjaninithin Chalamchala" class="about-img">
+                        <div class="experience-badge">
+                            <span class="badge-number">2+</span>
+                            <span class="badge-text">Years Exp</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="about-image" data-aos="fade-left" data-aos-duration="1000">
-                    <div class="about-image-container">
-                        <img src="./Nithin_prof.jpeg" alt="Anjaninithin Chalamchala" class="about-img">
-                        <div class="about-image-overlay">
-                            <div class="experience-badge">
-                                <span class="badge-number">2+</span>
-                                <span class="badge-text">Years Experience</span>
-                            </div>
+                <!-- About Info -->
+                <div class="about-info" data-aos="fade-up">
+                    <h3 class="about-name">Anjaninithin Chalamchala</h3>
+                    <p class="about-role">Full Stack Developer & AI/ML Engineer</p>
+                    
+                    <p class="about-bio">
+                        A passionate Computer Science student at IIITDM Kancheepuram with a strong academic record (CGPA: 9.1/10). I specialize in AI/ML Engineering, Full Stack Development, and FPGA Acceleration.
+                    </p>
+                    
+                    <p class="about-bio">
+                        My journey in technology spans from developing neural networks for medical imaging to building full-stack web applications, with a particular interest in AI-powered solutions.
+                    </p>
+                    
+                    <!-- Info Cards -->
+                    <div class="about-cards">
+                        <div class="about-card">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h4>Education</h4>
+                            <p>B.Tech CSE<br>IIITDM Kancheepuram</p>
+                        </div>
+                        <div class="about-card">
+                            <i class="fas fa-brain"></i>
+                            <h4>Expertise</h4>
+                            <p>AI/ML, Full Stack<br>FPGA Development</p>
+                        </div>
+                        <div class="about-card">
+                            <i class="fas fa-trophy"></i>
+                            <h4>Achievements</h4>
+                            <p>500+ LeetCode<br>CS Club Core</p>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="about-skills-preview" data-aos="fade-up" data-aos-duration="1000">
-                <h4>Core Competencies</h4>
-                <div class="skills-tags">
-                    <span class="skill-tag">AI/ML Engineering</span>
-                    <span class="skill-tag">Full Stack Development</span>
-                    <span class="skill-tag">Deep Learning</span>
-                    <span class="skill-tag">System Design</span>
-                    <span class="skill-tag">FPGA Acceleration</span>
-                </div>
-            </div>
-            
-            <div class="about-actions" data-aos="fade-up" data-aos-duration="1000">
-                <a href="#contact" class="btn btn-primary">
-                    <i class="fas fa-paper-plane"></i>
-                    Let's Connect
-                </a>
-                <a href="./Resume_Overall.pdf" class="btn btn-outline" download>
-                    <i class="fas fa-download"></i>
-                    Download Resume
-                </a>
-            </div>
-            
-            <!-- Achievement Stats -->
-            <div class="achievement-stats" data-aos="fade-up" data-aos-duration="1000">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-code"></i>
+                    
+                    <!-- Skills Tags -->
+                    <div class="about-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">JavaScript</span>
                     </div>
-                    <div class="stat-content">
-                        <h3 class="stat-number" data-target="500">0</h3>
-                        <p class="stat-label">Problems Solved</p>
-                        <span class="stat-sublabel">LeetCode & Competitive Programming</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3 class="stat-number" data-target="6">0</h3>
-                        <p class="stat-label">AI/ML Projects</p>
-                        <span class="stat-sublabel">Deep Learning & Computer Vision</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3 class="stat-number" data-target="9.1">0</h3>
-                        <p class="stat-label">CGPA</p>
-                        <span class="stat-sublabel">Academic Excellence</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3 class="stat-number" data-target="2">0</h3>
-                        <p class="stat-label">Leadership Roles</p>
-                        <span class="stat-sublabel">CS Club & Events</span>
+                    
+                    <!-- Action Buttons -->
+                    <div class="about-buttons">
+                        <a href="#contact" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i> Contact Me
+                        </a>
+                        <a href="./Resume_Overall.pdf" class="btn-secondary" download>
+                            <i class="fas fa-download"></i> Resume
+                        </a>
                     </div>
                 </div>
             </div>
             
-            <!-- Performance Metrics -->
-            <div class="performance-metrics" data-aos="fade-up" data-aos-duration="1000">
-                <h3>🏆 Key Performance Metrics</h3>
-                <div class="metrics-grid">
-                    <div class="metric-item">
-                        <div class="metric-value">0.86</div>
-                        <div class="metric-label">QWK Score</div>
-                        <div class="metric-desc">Bone Age Prediction Model</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value">95%</div>
-                        <div class="metric-label">Faster Diagnosis</div>
-                        <div class="metric-desc">AI-powered Medical Imaging</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value">100%</div>
-                        <div class="metric-label">Uptime</div>
-                        <div class="metric-desc">Production Web Applications</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value">3+</div>
-                        <div class="metric-label">Years</div>
-                        <div class="metric-desc">Programming Experience</div>
-                    </div>
+            <!-- Stats Section -->
+            <div class="about-stats" data-aos="fade-up">
+                <div class="stat-box">
+                    <span class="stat-num">9.1</span>
+                    <span class="stat-text">CGPA</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">500+</span>
+                    <span class="stat-text">Problems Solved</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">6+</span>
+                    <span class="stat-text">Projects</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">2+</span>
+                    <span class="stat-text">Years Coding</span>
                 </div>
             </div>
         </div>
