@@ -314,50 +314,83 @@ function initTerminal() {
     const body = document.getElementById('terminalBody');
     if (!body) return;
 
-    const lines = [
-        { type: 'cmd',    prompt: '❯', cmd: 'whoami' },
-        { type: 'out',    text: '<span class="t-string">anjaninithin_chalamchala</span>' },
-        { type: 'cmd',    prompt: '❯', cmd: 'cat profile.json' },
-        { type: 'out',    text: '{' },
-        { type: 'out',    text: '&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-val">"AI/ML Engineer & Full Stack Dev"</span>,' },
-        { type: 'out',    text: '&nbsp;&nbsp;<span class="t-key">"college"</span>: <span class="t-val">"IIITDM Kancheepuram"</span>,' },
-        { type: 'out',    text: '&nbsp;&nbsp;<span class="t-key">"cgpa"</span>: <span class="t-string">9.1</span>,' },
-        { type: 'out',    text: '&nbsp;&nbsp;<span class="t-key">"leetcode"</span>: <span class="t-string">"500+ solved"</span>' },
-        { type: 'out',    text: '}' },
-        { type: 'cmd',    prompt: '❯', cmd: 'ls skills/' },
-        { type: 'out',    text: '<span class="t-string">python</span>&nbsp;&nbsp;<span class="t-string">react</span>&nbsp;&nbsp;<span class="t-string">tensorflow</span>&nbsp;&nbsp;<span class="t-string">c++</span>&nbsp;&nbsp;<span class="t-string">fpga</span>' },
-        { type: 'cmd',    prompt: '❯', cmd: 'git log --oneline -3' },
-        { type: 'out',    text: '<span class="t-comment">a1b2c3 Bone Age Prediction — 0.86 QWK</span>' },
-        { type: 'out',    text: '<span class="t-comment">d4e5f6 LANConf — offline WebRTC conferencing</span>' },
-        { type: 'out',    text: '<span class="t-comment">g7h8i9 XV6 OS — MLFQ scheduler + security</span>' },
-        { type: 'cursor', prompt: '❯', cmd: '' },
+    // Script: each entry is either a command (typed char by char) or output (appears instantly)
+    const script = [
+        { kind: 'cmd',  text: 'whoami' },
+        { kind: 'out',  html: '<span class="t-green">anjaninithin_chalamchala</span>' },
+        { kind: 'blank' },
+        { kind: 'cmd',  text: 'cat profile.json' },
+        { kind: 'out',  html: '{' },
+        { kind: 'out',  html: '  <span class="t-blue">"role"</span>: <span class="t-yellow">"AI/ML Engineer &amp; Full Stack Dev"</span>,' },
+        { kind: 'out',  html: '  <span class="t-blue">"college"</span>: <span class="t-yellow">"IIITDM Kancheepuram"</span>,' },
+        { kind: 'out',  html: '  <span class="t-blue">"cgpa"</span>: <span class="t-green">9.1</span>,' },
+        { kind: 'out',  html: '  <span class="t-blue">"leetcode"</span>: <span class="t-green">"500+ solved"</span>,' },
+        { kind: 'out',  html: '  <span class="t-blue">"status"</span>: <span class="t-yellow">"open to opportunities"</span>' },
+        { kind: 'out',  html: '}' },
+        { kind: 'blank' },
+        { kind: 'cmd',  text: 'ls ./skills' },
+        { kind: 'out',  html: '<span class="t-green">python</span>  <span class="t-green">react</span>  <span class="t-green">tensorflow</span>  <span class="t-green">c++</span>  <span class="t-green">node.js</span>  <span class="t-green">fpga</span>' },
+        { kind: 'blank' },
+        { kind: 'cmd',  text: 'git log --oneline -3' },
+        { kind: 'out',  html: '<span class="t-orange">a1b2c3</span> <span class="t-muted">Bone Age Prediction — 0.86 QWK accuracy</span>' },
+        { kind: 'out',  html: '<span class="t-orange">d4e5f6</span> <span class="t-muted">LANConf — offline WebRTC conferencing</span>' },
+        { kind: 'out',  html: '<span class="t-orange">g7h8i9</span> <span class="t-muted">XV6 OS — MLFQ scheduler + security</span>' },
+        { kind: 'cursor' },
     ];
 
-    let i = 0;
-    function renderNext() {
-        if (i >= lines.length) return;
-        const l = lines[i++];
-        const div = document.createElement('div');
-        div.className = 't-line';
+    let step = 0;
 
-        if (l.type === 'cmd') {
-            div.innerHTML = `<span class="t-prompt">${l.prompt}</span><span class="t-cmd">${l.cmd}</span>`;
-        } else if (l.type === 'out') {
-            div.innerHTML = `<span class="t-output">${l.text}</span>`;
-        } else if (l.type === 'cursor') {
-            div.innerHTML = `<span class="t-prompt">${l.prompt}</span><span class="t-cursor"></span>`;
+    function nextStep() {
+        if (step >= script.length) return;
+        const entry = script[step++];
+
+        if (entry.kind === 'blank') {
+            const div = document.createElement('div');
+            div.style.height = '0.4rem';
+            body.appendChild(div);
+            setTimeout(nextStep, 80);
+
+        } else if (entry.kind === 'out') {
+            const div = document.createElement('div');
+            div.className = 't-line t-out';
+            div.innerHTML = entry.html;
+            body.appendChild(div);
+            body.scrollTop = body.scrollHeight;
+            setTimeout(nextStep, 100);
+
+        } else if (entry.kind === 'cmd') {
+            // Show prompt + type chars one by one
+            const div = document.createElement('div');
+            div.className = 't-line t-cmd-line';
+            div.innerHTML = '<span class="t-prompt">❯ </span><span class="t-cmd-text"></span>';
+            body.appendChild(div);
+            body.scrollTop = body.scrollHeight;
+
+            const cmdSpan = div.querySelector('.t-cmd-text');
+            let ci = 0;
+            function typeChar() {
+                if (ci < entry.text.length) {
+                    cmdSpan.textContent += entry.text[ci++];
+                    body.scrollTop = body.scrollHeight;
+                    setTimeout(typeChar, 55);
+                } else {
+                    // Done typing — pause then show output
+                    setTimeout(nextStep, 300);
+                }
+            }
+            setTimeout(typeChar, 120);
+
+        } else if (entry.kind === 'cursor') {
+            const div = document.createElement('div');
+            div.className = 't-line t-cmd-line';
+            div.innerHTML = '<span class="t-prompt">❯ </span><span class="t-cursor-block"></span>';
+            body.appendChild(div);
+            body.scrollTop = body.scrollHeight;
         }
-
-        body.appendChild(div);
-        requestAnimationFrame(() => div.classList.add('show'));
-        body.scrollTop = body.scrollHeight;
-
-        const delay = l.type === 'cmd' ? 600 : 120;
-        setTimeout(renderNext, delay);
     }
 
-    // Start after preloader
-    setTimeout(renderNext, 1400);
+    // Kick off after preloader clears
+    setTimeout(nextStep, 1500);
 }
 
 function preloadImages() {
