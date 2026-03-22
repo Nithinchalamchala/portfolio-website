@@ -23,7 +23,7 @@ function initializeApp() {
     initContactForm();
     initScrollProgress();
     initBackToTop();
-    initTerminal();
+    initOrbit();
     preloadImages();
 }
 
@@ -309,90 +309,44 @@ function showNotification(message, type = 'info') {
     setTimeout(() => n.remove(), 5000);
 }
 
-// ===== TERMINAL ANIMATION =====
-function initTerminal() {
-    const body = document.getElementById('terminalBody');
-    if (!body) return;
+// ===== ORBIT ANIMATION =====
+function initOrbit() {
+    const container = document.querySelector('.orbit-container');
+    if (!container) return;
 
-    // Script: each entry is either a command (typed char by char) or output (appears instantly)
-    const script = [
-        { kind: 'cmd',  text: 'whoami' },
-        { kind: 'out',  html: '<span class="t-green">anjaninithin_chalamchala</span>' },
-        { kind: 'blank' },
-        { kind: 'cmd',  text: 'cat profile.json' },
-        { kind: 'out',  html: '{' },
-        { kind: 'out',  html: '  <span class="t-blue">"role"</span>: <span class="t-yellow">"AI/ML Engineer &amp; Full Stack Dev"</span>,' },
-        { kind: 'out',  html: '  <span class="t-blue">"college"</span>: <span class="t-yellow">"IIITDM Kancheepuram"</span>,' },
-        { kind: 'out',  html: '  <span class="t-blue">"cgpa"</span>: <span class="t-green">9.1</span>,' },
-        { kind: 'out',  html: '  <span class="t-blue">"leetcode"</span>: <span class="t-green">"500+ solved"</span>,' },
-        { kind: 'out',  html: '  <span class="t-blue">"status"</span>: <span class="t-yellow">"open to opportunities"</span>' },
-        { kind: 'out',  html: '}' },
-        { kind: 'blank' },
-        { kind: 'cmd',  text: 'ls ./skills' },
-        { kind: 'out',  html: '<span class="t-green">python</span>  <span class="t-green">react</span>  <span class="t-green">tensorflow</span>  <span class="t-green">c++</span>  <span class="t-green">node.js</span>  <span class="t-green">fpga</span>' },
-        { kind: 'blank' },
-        { kind: 'cmd',  text: 'git log --oneline -3' },
-        { kind: 'out',  html: '<span class="t-orange">a1b2c3</span> <span class="t-muted">Bone Age Prediction — 0.86 QWK accuracy</span>' },
-        { kind: 'out',  html: '<span class="t-orange">d4e5f6</span> <span class="t-muted">LANConf — offline WebRTC conferencing</span>' },
-        { kind: 'out',  html: '<span class="t-orange">g7h8i9</span> <span class="t-muted">XV6 OS — MLFQ scheduler + security</span>' },
-        { kind: 'cursor' },
-    ];
+    const innerIcons = [...container.querySelectorAll('.orbit-inner .orbit-icon')];
+    const outerIcons = [...container.querySelectorAll('.orbit-outer .orbit-icon')];
+    const innerR = 100, outerR = 160;
+    let innerAngle = 0, outerAngle = 0;
 
-    let step = 0;
+    [...innerIcons, ...outerIcons].forEach(icon => {
+        icon.style.position = 'absolute';
+        icon.style.top = '50%';
+        icon.style.left = '50%';
+        icon.style.willChange = 'transform';
+    });
 
-    function nextStep() {
-        if (step >= script.length) return;
-        const entry = script[step++];
-
-        if (entry.kind === 'blank') {
-            const div = document.createElement('div');
-            div.style.height = '0.4rem';
-            body.appendChild(div);
-            setTimeout(nextStep, 80);
-
-        } else if (entry.kind === 'out') {
-            const div = document.createElement('div');
-            div.className = 't-line t-out';
-            div.innerHTML = entry.html;
-            body.appendChild(div);
-            body.scrollTop = body.scrollHeight;
-            setTimeout(nextStep, 100);
-
-        } else if (entry.kind === 'cmd') {
-            // Show prompt + type chars one by one
-            const div = document.createElement('div');
-            div.className = 't-line t-cmd-line';
-            div.innerHTML = '<span class="t-prompt">❯ </span><span class="t-cmd-text"></span>';
-            body.appendChild(div);
-            body.scrollTop = body.scrollHeight;
-
-            const cmdSpan = div.querySelector('.t-cmd-text');
-            let ci = 0;
-            function typeChar() {
-                if (ci < entry.text.length) {
-                    cmdSpan.textContent += entry.text[ci++];
-                    body.scrollTop = body.scrollHeight;
-                    setTimeout(typeChar, 55);
-                } else {
-                    // Done typing — pause then show output
-                    setTimeout(nextStep, 300);
-                }
-            }
-            setTimeout(typeChar, 120);
-
-        } else if (entry.kind === 'cursor') {
-            const div = document.createElement('div');
-            div.className = 't-line t-cmd-line';
-            div.innerHTML = '<span class="t-prompt">❯ </span><span class="t-cursor-block"></span>';
-            body.appendChild(div);
-            body.scrollTop = body.scrollHeight;
-        }
+    function tick() {
+        innerIcons.forEach((icon, i) => {
+            const a = (innerAngle + (360 / innerIcons.length) * i) * Math.PI / 180;
+            const x = Math.cos(a) * innerR - 23;
+            const y = Math.sin(a) * innerR - 23;
+            icon.style.transform = `translate(${x}px, ${y}px) rotate(${-innerAngle}deg)`;
+        });
+        outerIcons.forEach((icon, i) => {
+            const a = (outerAngle + (360 / outerIcons.length) * i) * Math.PI / 180;
+            const x = Math.cos(a) * outerR - 23;
+            const y = Math.sin(a) * outerR - 23;
+            icon.style.transform = `translate(${x}px, ${y}px) rotate(${outerAngle}deg)`;
+        });
+        innerAngle += 0.25;
+        outerAngle -= 0.15;
+        requestAnimationFrame(tick);
     }
-
-    // Kick off after preloader clears
-    setTimeout(nextStep, 1500);
+    tick();
 }
 
+// ===== PRELOAD IMAGES =====
 function preloadImages() {
     ['./Nithin_prof.jpeg', './Nithin_casual.jpeg'].forEach(src => {
         const link = document.createElement('link');
