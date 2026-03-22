@@ -114,43 +114,50 @@
     <main class="main-content">
         <!-- Hero Section -->
         <section id="home" class="hero-section">
+            <div class="hero-bg-grid"></div>
             <div class="hero-content-wrapper">
-                <div class="hero-image">
-                    <div class="image-container">
-                        <img src="./Nithin_casual.jpeg" alt="Anjaninithin Chalamchala" class="main-image">
-                        <div class="image-overlay"></div>
-                    </div>
-                </div>
-                
+                <!-- Left: Text -->
                 <div class="hero-text">
-                    <div class="hero-intro">
-                        <p class="hero-greeting">Hello, I'm</p>
-                        <h1 class="hero-name">Anjaninithin Chalamchala</h1>
-                        <h2 class="hero-title">I'm a <span class="typing-text" id="typingText">Full Stack Developer</span></h2>
-                    </div>
-                    
-                    <div class="hero-description">
-                        <p>Computer Science Student at IIITDM Kancheepuram specializing in AI/ML Engineering, Full Stack Development, and FPGA Acceleration. Passionate about creating innovative solutions that bridge artificial intelligence, software development, and hardware technologies.</p>
-                    </div>
-                    
+                    <p class="hero-greeting">Hello, I'm</p>
+                    <h1 class="hero-name">Anjaninithin<br>Chalamchala</h1>
+                    <h2 class="hero-title">I'm a <span class="typing-text" id="typingText">Full Stack Developer</span></h2>
+                    <p class="hero-description">CS Student at IIITDM Kancheepuram · AI/ML Engineering · Full Stack Development · FPGA Acceleration</p>
+
                     <div class="hero-stats">
                         <div class="stat-item">
-                            <span class="stat-number" data-target="9.1">9.1</span>
+                            <span class="stat-number" data-target="9.1">0</span>
                             <span class="stat-label">CGPA</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number" data-target="500">500+</span>
+                        <div class="stat-item"></div>
+                            <span class="stat-number" data-target="500">0</span>
                             <span class="stat-label">LeetCode</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number" data-target="6">6+</span>
+                            <span class="stat-number" data-target="6">0</span>
                             <span class="stat-label">Projects</span>
                         </div>
                     </div>
-                    
+
                     <div class="hero-actions">
                         <a href="#projects" class="btn-primary">View Portfolio</a>
                         <a href="./Resume_Overall.pdf" class="btn-secondary" download>Download CV</a>
+                    </div>
+                </div>
+
+                <!-- Right: Terminal -->
+                <div class="hero-terminal"></div>
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
+                            <span class="terminal-title">nithin@portfolio ~ </span>
+                        </div>
+                        <div class="terminal-body" id="terminalBody">
+                            <!-- Lines injected by JS -->
+                        </div>
                     </div>
                 </div>
             </div>

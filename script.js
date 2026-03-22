@@ -23,6 +23,7 @@ function initializeApp() {
     initContactForm();
     initScrollProgress();
     initBackToTop();
+    initTerminal();
     preloadImages();
 }
 
@@ -308,7 +309,57 @@ function showNotification(message, type = 'info') {
     setTimeout(() => n.remove(), 5000);
 }
 
-// ===== PRELOAD IMAGES =====
+// ===== TERMINAL ANIMATION =====
+function initTerminal() {
+    const body = document.getElementById('terminalBody');
+    if (!body) return;
+
+    const lines = [
+        { type: 'cmd',    prompt: '❯', cmd: 'whoami' },
+        { type: 'out',    text: '<span class="t-string">anjaninithin_chalamchala</span>' },
+        { type: 'cmd',    prompt: '❯', cmd: 'cat profile.json' },
+        { type: 'out',    text: '{' },
+        { type: 'out',    text: '&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-val">"AI/ML Engineer & Full Stack Dev"</span>,' },
+        { type: 'out',    text: '&nbsp;&nbsp;<span class="t-key">"college"</span>: <span class="t-val">"IIITDM Kancheepuram"</span>,' },
+        { type: 'out',    text: '&nbsp;&nbsp;<span class="t-key">"cgpa"</span>: <span class="t-string">9.1</span>,' },
+        { type: 'out',    text: '&nbsp;&nbsp;<span class="t-key">"leetcode"</span>: <span class="t-string">"500+ solved"</span>' },
+        { type: 'out',    text: '}' },
+        { type: 'cmd',    prompt: '❯', cmd: 'ls skills/' },
+        { type: 'out',    text: '<span class="t-string">python</span>&nbsp;&nbsp;<span class="t-string">react</span>&nbsp;&nbsp;<span class="t-string">tensorflow</span>&nbsp;&nbsp;<span class="t-string">c++</span>&nbsp;&nbsp;<span class="t-string">fpga</span>' },
+        { type: 'cmd',    prompt: '❯', cmd: 'git log --oneline -3' },
+        { type: 'out',    text: '<span class="t-comment">a1b2c3 Bone Age Prediction — 0.86 QWK</span>' },
+        { type: 'out',    text: '<span class="t-comment">d4e5f6 LANConf — offline WebRTC conferencing</span>' },
+        { type: 'out',    text: '<span class="t-comment">g7h8i9 XV6 OS — MLFQ scheduler + security</span>' },
+        { type: 'cursor', prompt: '❯', cmd: '' },
+    ];
+
+    let i = 0;
+    function renderNext() {
+        if (i >= lines.length) return;
+        const l = lines[i++];
+        const div = document.createElement('div');
+        div.className = 't-line';
+
+        if (l.type === 'cmd') {
+            div.innerHTML = `<span class="t-prompt">${l.prompt}</span><span class="t-cmd">${l.cmd}</span>`;
+        } else if (l.type === 'out') {
+            div.innerHTML = `<span class="t-output">${l.text}</span>`;
+        } else if (l.type === 'cursor') {
+            div.innerHTML = `<span class="t-prompt">${l.prompt}</span><span class="t-cursor"></span>`;
+        }
+
+        body.appendChild(div);
+        requestAnimationFrame(() => div.classList.add('show'));
+        body.scrollTop = body.scrollHeight;
+
+        const delay = l.type === 'cmd' ? 600 : 120;
+        setTimeout(renderNext, delay);
+    }
+
+    // Start after preloader
+    setTimeout(renderNext, 1400);
+}
+
 function preloadImages() {
     ['./Nithin_prof.jpeg', './Nithin_casual.jpeg'].forEach(src => {
         const link = document.createElement('link');
